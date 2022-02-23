@@ -16,6 +16,7 @@ import LoginController from '../controllers/Auth/Login';
 import LogoutController from '../controllers/Auth/Logout';
 import SocialController from '../controllers/Auth/Social';
 import RegisterController from '../controllers/Auth/Register';
+import { Session } from '../middlewares/Http';
 
 const router = Router();
 const cache = Cache.cache;
@@ -37,7 +38,8 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
 
 router.get('/auth/twitter', passport.authenticate('twitter'));
 router.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), (req, res) => {
-	res.redirect(req.session.returnTo || '/');
+	const s: Session = req.session
+	res.redirect(s.returnTo || '/');
 });
 
 export default router;
