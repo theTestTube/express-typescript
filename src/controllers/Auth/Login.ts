@@ -4,11 +4,13 @@
  * @author Faiz A. Farooqui <faiz@geekyants.com>
  */
 
+import session = require('express-session');
 import * as passport from 'passport';
 
 import {
 	IRequest, IResponse, INext
 } from '../../interfaces/vendors';
+import { Session } from '../../middlewares/Http';
 import Log from '../../middlewares/Log';
 
 class Login {
@@ -49,7 +51,9 @@ class Login {
 				}
 
 				req.flash('success', { msg: 'You are successfully logged in now!' });
-				res.redirect(req.session.returnTo || '/account');
+				
+				const s: Session = req.session
+				res.redirect(s.returnTo || '/account');
 			});
 		})(req, res, next);
 	}

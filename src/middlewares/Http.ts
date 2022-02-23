@@ -77,4 +77,6 @@ class Http {
 	}
 }
 
+export type Session = session.Session & Partial<session.SessionData> & {returnTo?: undefined};
+
 export default Http;
