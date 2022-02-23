@@ -60,9 +60,9 @@
     "typescript-eslint-parser": "^18.0.0"
   },
   "scripts": {
-    "build": "tsc --project './tsconfig.json'",
-    "dev": "tsc --project './tsconfig.json' --watch & NODE_ENV=development nodemon dist",
-    "test": "tsc --project './tsconfig.json' && ./node_modules/.bin/mocha dist/**/*.spec.js",
+    "build": "tsc --project ./tsconfig.json",
+    "dev": "tsc --project ./tsconfig.json --watch & NODE_ENV=development nodemon dist",
+    "test": "tsc --project ./tsconfig.json && ./node_modules/.bin/mocha dist/**/*.spec.js",
     "lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/**.ts'"
   },
   "author": "Faiz A. Farooqui <faiz@geekyants.com>",
