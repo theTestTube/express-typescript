@@ -69,13 +69,15 @@ UserSchema.pre<IUserModel>('save', function (_next) {
 // Custom Methods
 // Get user's full billing address
 UserSchema.methods.billingAddress = function (): string {
-	const fulladdress = `${this.fullname.trim()} ${this.geolocation.trim()}`;
+	const user: any = this;
+	const fulladdress = `${user.fullname.trim()} ${user.geolocation.trim()}`;
 	return fulladdress;
 };
 
 // Compares the user's password with the request password
 UserSchema.methods.comparePassword = function (_requestPassword, _cb): any {
-	bcrypt.compare(_requestPassword, this.password, (_err, _isMatch) => {
+	const user: any = this;
+	bcrypt.compare(_requestPassword, user.password, (_err, _isMatch) => {
 		return _cb(_err, _isMatch);
 	});
 };
@@ -85,13 +87,14 @@ UserSchema.methods.gravatar = function (_size): any {
 	if (! _size) {
 		_size = 200;
 	}
-
+	
 	const url = 'https://gravatar.com/avatar';
-	if (! this.email) {
+	const user: any = this;
+	if (! user.email) {
 		return `${url}/?s=${_size}&d=retro`;
 	}
 
-	const md5 = crypto.createHash('md5').update(this.email).digest('hex');
+	const md5 = crypto.createHash('md5').update(user.email).digest('hex');
 	return `${url}/${md5}?s=${_size}&d=retro`;
 };
 
